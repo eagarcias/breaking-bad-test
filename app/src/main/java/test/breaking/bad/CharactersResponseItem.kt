@@ -1,6 +1,7 @@
 package test.breaking.bad
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class CharactersResponseItem(
     @SerializedName("appearance")
@@ -25,4 +26,4 @@ data class CharactersResponseItem(
     val portrayed: String,
     @SerializedName("status")
     val status: String
-)
+) : Serializable

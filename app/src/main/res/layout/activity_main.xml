@@ -9,7 +9,7 @@
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/svCharacters"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintVertical_bias="0"
         app:layout_constraintBottom_toBottomOf="parent"

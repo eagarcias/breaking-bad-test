@@ -11,9 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import test.breaking.bad.databinding.ActivityMainBinding
-import java.time.temporal.TemporalQuery
 
 class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
@@ -26,11 +24,12 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.svCharacters.setOnQueryTextListener(this)
+        title = "Breaking Bad Characters"
         initRecyclerView()
     }
 
     private fun initRecyclerView() {
-        adapter = CharactersAdapter(bbCharacters)
+        adapter = CharactersAdapter(bbCharacters, this)
         binding.rvCharacters.layoutManager = LinearLayoutManager(this)
         binding.rvCharacters.adapter = adapter
         searchByName("")
@@ -45,7 +44,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private fun searchByName(query:String?){
         CoroutineScope(Dispatchers.IO).launch {
-            var call = getRetrofit().create(APIService::class.java).getCharactersByName("characters", query)
+            val call = getRetrofit().create(APIService::class.java).getCharactersByName("characters", query)
             val characters = call.body()
             runOnUiThread {
                 if (call.isSuccessful){
@@ -67,7 +66,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     private fun showError() {
-        Toast.makeText(this, "Ha ocurrido un error", Toast.LENGTH_SHORT)
+        Toast.makeText(this, "An error has occurred", Toast.LENGTH_SHORT).show()
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {

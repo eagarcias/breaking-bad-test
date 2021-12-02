@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Breaking Bad Test</string>
+    <string name="occupation_label">Occupation:</string>
+    <string name="status_label">Status:</string>
+    <string name="portrayed_label">Portrayed:</string>
 </resources>
